@@ -8,6 +8,7 @@ public interface BaseURI {
 
     String PUBLIC = "/public";
     String TEST = "/test";
+    String REGISTRATION = "/registration";
     String LOGIN = "/login";
     String TOKEN = "/token";
     String REFRESH = "/refresh";
