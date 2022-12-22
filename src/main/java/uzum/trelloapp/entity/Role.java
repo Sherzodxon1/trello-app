@@ -1,15 +1,13 @@
 package uzum.trelloapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "roles")
@@ -20,7 +18,7 @@ public class Role {
     @Column(name = "id", unique = true)
     protected Long id;
 
-    @Column(name = "name", unique = true, nullable = true)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
 }
