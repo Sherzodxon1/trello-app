@@ -21,7 +21,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("uz.applimonpay.controller"))
+                .apis(RequestHandlerSelectors.basePackage("uzum.trelloapp.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
