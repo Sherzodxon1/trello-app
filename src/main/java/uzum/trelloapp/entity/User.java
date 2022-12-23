@@ -7,12 +7,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@ToString
 @Table(name = "users")
 public class User extends BaseEntity {
 
