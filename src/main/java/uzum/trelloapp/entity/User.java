@@ -1,6 +1,7 @@
 package uzum.trelloapp.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 import uzum.trelloapp.base.BaseEntity;
 
 import javax.persistence.*;
@@ -30,6 +31,10 @@ public class User extends BaseEntity {
 
     @Column(name = "phone", nullable = false)
     private String phone;
+
+    @Column(name = "super_admin", columnDefinition = "NUMERIC default 0")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    protected boolean superAdmin = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();

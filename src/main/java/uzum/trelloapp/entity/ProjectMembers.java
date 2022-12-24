@@ -18,12 +18,12 @@ public class ProjectMembers extends BaseEntity {
     @JoinColumn(name = "project_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Project project;
     @Column(name = "project_id")
-    private Integer projectId;
+    private Long projectId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User user;
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
 }

@@ -21,13 +21,13 @@ public class Task extends BaseEntity {
     @JoinColumn(name = "project_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Project project;
     @Column(name = "project_id")
-    private Integer projectId;
+    private Long projectId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_column_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ProjectColumn projectColumn;
     @Column(name = "project_column_id")
-    private Integer projectColumnId;
+    private Long projectColumnId;
 
     @Column(name = "position")
     private Integer position;

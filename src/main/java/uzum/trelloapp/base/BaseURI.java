@@ -14,6 +14,8 @@ public interface BaseURI {
     String REFRESH = "/refresh";
     String USER = "/user";
     String ROLE = "/role";
+    String GROUP = "/group";
+    String PROJECT = "/project";
 
     String GET = "/get";
     String ALL = "/all";

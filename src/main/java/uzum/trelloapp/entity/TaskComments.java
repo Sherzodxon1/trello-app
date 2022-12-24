@@ -21,12 +21,12 @@ public class TaskComments extends BaseEntity {
     @JoinColumn(name = "task_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Task task;
     @Column(name = "task_id")
-    private Integer taskId;
+    private Long taskId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User user;
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
 }

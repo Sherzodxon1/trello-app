@@ -19,7 +19,7 @@ public class TaskCheckListItem extends BaseEntity {
     @JoinColumn(name = "task_check_list_id", referencedColumnName = "id", insertable = false, updatable = false)
     private TaskCheckList taskCheckList;
     @Column(name = "task_check_list_id")
-    private Integer taskCheckListId;
+    private Long taskCheckListId;
 
     @Column(name = "is_finished", columnDefinition = "NUMERIC default 0")
     @Type(type = "org.hibernate.type.NumericBooleanType")

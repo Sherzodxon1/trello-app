@@ -2,7 +2,7 @@ package uzum.trelloapp.entity;
 
 import lombok.*;
 import uzum.trelloapp.base.BaseEntity;
-import uzum.trelloapp.enums.GrPrType;
+import uzum.trelloapp.enums.GroupType;
 
 import javax.persistence.*;
 
@@ -18,6 +18,9 @@ public class Group extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "description")
     private String description;
 
@@ -25,10 +28,10 @@ public class Group extends BaseEntity {
     @JoinColumn(name = "owner_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User owner;
     @Column(name = "owner_id")
-    private Integer ownerId;
+    private Long ownerId;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "gr_pr_type")
-    private GrPrType grPrType;
+    @Column(name = "type")
+    private GroupType type;
 
 }
