@@ -21,7 +21,7 @@ public class ProjectColumn extends BaseEntity {
     @JoinColumn(name = "project_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Project project;
     @Column(name = "project_id")
-    private Integer projectId;
+    private Long projectId;
 
     @Column(name = "position")
     private Integer position;

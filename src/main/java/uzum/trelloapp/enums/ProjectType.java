@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
-public enum GrPrType {
+public enum ProjectType {
 
     PRIVATE("PRIVATE"),
     PUBLIC("PUBLIC"),
@@ -17,8 +17,8 @@ public enum GrPrType {
     private final String description;
 
 
-    public static GrPrType getByName(final String name) {
-        return Arrays.stream(GrPrType.values())
+    public static ProjectType getByName(final String name) {
+        return Arrays.stream(ProjectType.values())
                 .filter(operationType -> operationType.name().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(UNKNOWN);

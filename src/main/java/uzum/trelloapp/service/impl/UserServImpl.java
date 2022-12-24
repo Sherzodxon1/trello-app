@@ -285,7 +285,7 @@ public class UserServImpl implements UserServ {
         }
         try {
             String refresh_token = req.getRefreshToken();
-            Algorithm algorithm = Algorithm.HMAC256("java".getBytes());
+            Algorithm algorithm = Algorithm.HMAC256("trello".getBytes());
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(refresh_token);
             String username = decodedJWT.getSubject();

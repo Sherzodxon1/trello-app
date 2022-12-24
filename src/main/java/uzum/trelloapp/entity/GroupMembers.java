@@ -18,12 +18,12 @@ public class GroupMembers extends BaseEntity {
     @JoinColumn(name = "group_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Group group;
     @Column(name = "group_id")
-    private Integer groupId;
+    private Long groupId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User user;
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
 }

@@ -21,6 +21,6 @@ public class TaskCheckList extends BaseEntity {
     @JoinColumn(name = "task_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Task task;
     @Column(name = "task_id")
-    private Integer taskId;
+    private Long taskId;
 
 }

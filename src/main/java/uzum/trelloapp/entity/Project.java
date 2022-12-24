@@ -2,7 +2,7 @@ package uzum.trelloapp.entity;
 
 import lombok.*;
 import uzum.trelloapp.base.BaseEntity;
-import uzum.trelloapp.enums.GrPrType;
+import uzum.trelloapp.enums.ProjectType;
 
 import javax.persistence.*;
 
@@ -17,6 +17,9 @@ public class Project extends BaseEntity {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "description")
     private String description;
@@ -34,6 +37,6 @@ public class Project extends BaseEntity {
     private Integer ownerId;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "gr_pr_type")
-    private GrPrType grPrType;
+    @Column(name = "type")
+    private ProjectType type;
 }

@@ -43,10 +43,6 @@ public abstract class BaseEntity implements Serializable {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     protected boolean deleted = false;
 
-    @Column(name = "super_admin", columnDefinition = "NUMERIC default 0")
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    protected boolean superAdmin = false;
-
     @JsonIgnore
     @JsonIgnoreProperties
     @CreatedDate
