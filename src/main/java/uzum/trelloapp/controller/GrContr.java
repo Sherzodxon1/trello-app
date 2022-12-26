@@ -7,16 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uzum.trelloapp.base.BaseURI;
 import uzum.trelloapp.common.ResponseData;
-import uzum.trelloapp.dto.gr.GrCrDTO;
-import uzum.trelloapp.dto.gr.GrDTO;
-import uzum.trelloapp.dto.gr.GrDelDTO;
-import uzum.trelloapp.dto.gr.GrUpDTO;
+import uzum.trelloapp.dto.gr.*;
 import uzum.trelloapp.exception.UserNotFoundException;
 import uzum.trelloapp.service.GrServ;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,8 +30,8 @@ public class GrContr {
 
     @ApiOperation(value = "Get GROUP by UUID")
     @GetMapping(BaseURI.GET)
-    public ResponseEntity<ResponseData<GrDTO>> get(@RequestParam(value = "uuid") UUID uuid) {
-        return serv.get(uuid);
+    public ResponseEntity<ResponseData<GrDTO>> get(@Valid @RequestBody GrGetDTO dto) {
+        return serv.get(dto);
     }
 
     @ApiOperation(value = "Create GROUP")
