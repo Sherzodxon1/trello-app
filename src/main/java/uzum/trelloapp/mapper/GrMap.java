@@ -39,8 +39,8 @@ public interface GrMap {
     Group toEntity(GrCrDTO dto);
 
     @Mapping(target = "name", source = "dto.name")
-    @Mapping(target = "type", source = "dto.type", qualifiedByName = "mapGroupType")
+    @Mapping(target = "username", source = "dto.username")
     @Mapping(target = "description", source = "dto.description")
-    @Mapping(target = "ownerId", ignore = true)
+    @Mapping(target = "type", source = "dto.type", qualifiedByName = "mapGroupType")
     Group toEntity(@MappingTarget Group group, GrUpDTO dto);
 }

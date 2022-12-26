@@ -12,7 +12,9 @@ import java.util.UUID;
 public interface GrRepo extends BaseRepo<Group> {
     List<Group> findAllByDeletedIsFalseAndActiveIsTrue();
 
-    List<Group> findAllByOwnerId(Long id);
+//    List<Group> findAllByOwnerId(Long id);
+    List<Group> findAllByOwnerUuid(UUID uuid);
+    Optional<Group> findByOwnerUuid(UUID uuid);
 
     Optional<Group> findByUuid(UUID uuid);
 
