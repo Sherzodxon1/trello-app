@@ -330,4 +330,17 @@ public class UserServImpl implements UserServ {
         }
     }
 
+    @Override
+    public User checkUser(UUID uuid) {
+        Optional<User> optional = repo.findByUuid(uuid);
+        if (optional.isEmpty()) {
+            throw new RuntimeException("User not found !!!");
+        }
+        User user = optional.get();
+        if (!user.isActive()) {
+            throw new RuntimeException("This user is not active !!!");
+        }
+        return user;
+    }
+
 }

@@ -45,4 +45,6 @@ public interface UserServ {
     void attachRoleToUser(String phone, String roleName);
 
     ResponseEntity<ResponseData<UserDTO>> registration(ReqRegDTO req, HttpServletRequest httpReq) throws AlreadyExistsException;
+
+    User checkUser(UUID uuid);
 }
