@@ -65,7 +65,7 @@ public class GrServImpl implements GrServ {
                 return ResponseData.success200(mapper.toDto(optional.get()));
 
             } else {
-                boolean isMember = this.isMember(group.getId(), user.getId());
+                boolean isMember = this.isMember(group.getUuid(), user.getUuid());
                 if (isMember) {
                     Optional<Group> optional = repo.findByUuid(group.getUuid());
                     if (Utils.isEmpty(optional)) {
@@ -168,18 +168,20 @@ public class GrServImpl implements GrServ {
     public Group checkGroup(UUID uuid) {
         Optional<Group> groupOptional = repo.findByUuid(uuid);
         if (groupOptional.isEmpty()) {
+            log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", uuid);
             throw new RuntimeException("Group not found!!!");
         }
         Group group = groupOptional.get();
         if (!group.isActive()) {
+            log.error("Group uuid, {} bo'yicha faol emas!", uuid);
             throw new RuntimeException("This group is not active!!!");
         }
         return group;
     }
 
     @Override
-    public boolean isMember(Long groupId, Long userId) {
-        Optional<GroupMembers> groupMemberOptional = grMemberRepo.findByGroupIdAndUserId(groupId, userId);
+    public boolean isMember(UUID groupUuid, UUID userUuid) {
+        Optional<GroupMembers> groupMemberOptional = grMemberRepo.findByGroupUuidAndUserUuid(groupUuid, userUuid);
         return groupMemberOptional.isPresent();
     }
 }

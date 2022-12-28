@@ -55,7 +55,10 @@ public class Utils {
     }
 
     public static boolean isAdmin(String roleName) {
-        //todo superadmin adminga tekshirish
         return "ROLE_SUPER_ADMIN".equals(roleName) || "ROLE_ADMIN".equals(roleName);
+    }
+
+    public static boolean isOwner(Long ownerId, Long id) {
+        return ownerId.equals(id);
     }
 }

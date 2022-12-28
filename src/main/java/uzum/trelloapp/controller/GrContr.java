@@ -9,6 +9,7 @@ import uzum.trelloapp.base.BaseURI;
 import uzum.trelloapp.common.ResponseData;
 import uzum.trelloapp.dto.gr.*;
 import uzum.trelloapp.exception.UserNotFoundException;
+import uzum.trelloapp.service.GrMemberServ;
 import uzum.trelloapp.service.GrServ;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.List;
 public class GrContr {
 
     private final GrServ serv;
+    private final GrMemberServ grMemberServ;
 
     @ApiOperation(value = "Get all GROUPS")
     @GetMapping(BaseURI.GET + BaseURI.ALL)
@@ -46,8 +48,15 @@ public class GrContr {
         return serv.edit(dto);
     }
 
+    @ApiOperation(value = "Delete GROUP")
+    @PostMapping(BaseURI.DELETE)
     public ResponseEntity<ResponseData<GrDTO>> delete(@Valid @RequestBody GrDelDTO dto) {
         return serv.delete(dto);
+    }
+
+    @PostMapping(BaseURI.ADD + BaseURI.MEMBER)
+    public ResponseEntity<ResponseData<GrMemberDTO>> addMember(@Valid @RequestBody GrMemberAddDTO dto) {
+        return grMemberServ.addMember(dto);
     }
 
 }
