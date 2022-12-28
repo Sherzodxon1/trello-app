@@ -96,7 +96,11 @@ public class GrServImpl implements GrServ {
             return ResponseData.inActive("This User's status is inactive !!!");
         }
 
-        group.setUsername(group.getName().toLowerCase() + System.currentTimeMillis());
+        String link = "https://trello.com/" + group.getName().toLowerCase() + "/" + UUID.randomUUID();
+        String username = group.getName().toLowerCase() + System.currentTimeMillis();
+
+        group.setUsername(username.replaceAll("\\s", ""));
+        group.setLink(link.replaceAll("\\s", ""));
         repo.save(group);
         log.info("Yangi group - {} saqlandi", group.getName());
 

@@ -31,6 +31,9 @@ public class GrDTO {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("link")
+    private String link;
+
     @JsonProperty("owner")
     private UserDTO owner;
 
