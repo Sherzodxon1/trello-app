@@ -47,4 +47,6 @@ public interface UserServ {
     ResponseEntity<ResponseData<UserDTO>> registration(ReqRegDTO req, HttpServletRequest httpReq) throws AlreadyExistsException;
 
     User checkUser(UUID uuid);
+
+    User findByUsername(String username) throws UsernameNotFoundException;
 }

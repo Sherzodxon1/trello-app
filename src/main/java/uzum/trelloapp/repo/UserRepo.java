@@ -17,4 +17,6 @@ public interface UserRepo extends BaseRepo<User> {
     Optional<User> findByPhoneAndPassword(String phone, String password);
 
     Optional<User> findByPhone(String phone);
+
+    Optional<User> findByUsername(String username);
 }

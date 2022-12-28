@@ -84,9 +84,10 @@ public class UserServImpl implements UserServ {
     public ResponseEntity<ResponseData<UserDTO>> add(UserCrDTO dto) {
         String roleName = RoleType.ROLE_USER.getDescription();
 
-        Optional<User> optional = repo.findByPhone(dto.getPhone());
-        if (optional.isPresent()) {
-            return ResponseData.alreadyExists("This user is already registered!");
+        Optional<User> username = repo.findByUsername(dto.getUsername());
+        if (Utils.isPresent(username)) {
+            return ResponseData.alreadyExists("This username is already registered! \n" +
+                    "Please choose another username!");
         }
 
         Role role = roleRepo.findByName(roleName);
@@ -203,7 +204,17 @@ public class UserServImpl implements UserServ {
     public User findByPhone(String phone) throws UsernameNotFoundException {
         Optional<User> userOptional = repo.findByPhone(phone);
         if (userOptional.isEmpty()) {
-            log.error("User uuid, {} bo'yicha ma'lumot topilmadi", phone);
+            log.error("User phone, {} bo'yicha ma'lumot topilmadi", phone);
+            throw new UsernameNotFoundException("This user is not found!!!");
+        }
+        return userOptional.get();
+    }
+
+    @Override
+    public User findByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> userOptional = repo.findByUsername(username);
+        if (userOptional.isEmpty()) {
+            log.error("User username, {} bo'yicha ma'lumot topilmadi", username);
             throw new UsernameNotFoundException("This user is not found!!!");
         }
         return userOptional.get();
@@ -289,10 +300,10 @@ public class UserServImpl implements UserServ {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(refresh_token);
             String username = decodedJWT.getSubject();
-            User user = repo.findByPhone(username).get();
+            Optional<User> user = repo.findByUsername(username);
             long expireIn = 60 * 60 * 1000;  // todo o'zgartirish mumkin 1 minutes
             String access_token = JWT.create()
-                    .withSubject(user.getPhone())
+                    .withSubject(user.get().getUsername())
                     .withExpiresAt(new Date(System.currentTimeMillis() + expireIn))   // 1 minutes
                     .withIssuer(httpReq.getRequestURL().toString())
                     .withClaim("roles", new ArrayList<>())  // todo set user roles
@@ -301,7 +312,7 @@ public class UserServImpl implements UserServ {
                     .expireIn(expireIn)
                     .accessToken(access_token)
                     .refreshToken(refresh_token)
-                    .user(user)
+                    .user(user.get())
                     .build();
             return ResponseEntity.ok(sessionDto);
         } catch (Exception e) {
@@ -316,7 +327,7 @@ public class UserServImpl implements UserServ {
                     .expireIn(json_auth.get("expires_in").asLong())
                     .accessToken(json_auth.get("access_token").asText())
                     .refreshToken(json_auth.get("refresh_token").asText())
-                    .user(repo.findByPhone(req.getUsername()).get())
+                    .user(repo.findByUsername(req.getUsername()).get())
                     .build();
             return ResponseEntity.ok(sessionDto);
         } else {

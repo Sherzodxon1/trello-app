@@ -21,6 +21,7 @@ public class Utils {
         return LocalDate.parse(stringDate, formatLocal);
     }
 
+
     public static boolean isEmpty(Object obj) {
         return obj == null;
     }
@@ -53,4 +54,8 @@ public class Utils {
         return map != null && !map.isEmpty();
     }
 
+    public static boolean isAdmin(String roleName) {
+        //todo superadmin adminga tekshirish
+        return "ROLE_SUPER_ADMIN".equals(roleName) || "ROLE_ADMIN".equals(roleName);
+    }
 }
