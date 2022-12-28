@@ -9,6 +9,7 @@ import uzum.trelloapp.common.ResponseData;
 import uzum.trelloapp.dto.gr.*;
 import uzum.trelloapp.entity.Group;
 import uzum.trelloapp.entity.GroupMembers;
+import uzum.trelloapp.entity.Role;
 import uzum.trelloapp.entity.User;
 import uzum.trelloapp.exception.UserNotFoundException;
 import uzum.trelloapp.helper.UserSession;
@@ -53,19 +54,32 @@ public class GrServImpl implements GrServ {
     public ResponseEntity<ResponseData<GrDTO>> get(GrGetDTO dto) {
         User user = userServ.checkUser(dto.getUser());  // check and get user
         Group group = this.checkGroup(dto.getGroup()); // check and get group
+        for (Role role : user.getRoles()) {
+            if (Utils.isAdmin(role.getName())) {
+                Optional<Group> optional = repo.findByUuid(group.getUuid());
+                if (Utils.isEmpty(optional)) {
+                    log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", group.getUuid());
+                    ResponseData.notFoundData("Group not found !!!");
+                }
+                log.info("Group uuid, {} bo'yicha ma'lumot olindi", group.getUuid());
+                return ResponseData.success200(mapper.toDto(optional.get()));
 
-        boolean isMember = this.isMember(group.getId(), user.getId());
-        if (isMember) {
-            Optional<Group> optional = repo.findByUuid(group.getUuid());
-            if (Utils.isEmpty(optional)) {
-                log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", group.getUuid());
-                ResponseData.notFoundData("Group not found !!!");
+            } else {
+                boolean isMember = this.isMember(group.getId(), user.getId());
+                if (isMember) {
+                    Optional<Group> optional = repo.findByUuid(group.getUuid());
+                    if (Utils.isEmpty(optional)) {
+                        log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", group.getUuid());
+                        ResponseData.notFoundData("Group not found !!!");
+                    }
+                    log.info("Group uuid, {} bo'yicha ma'lumot olindi", group.getUuid());
+                    return ResponseData.success200(mapper.toDto(optional.get()));
+                }
+                log.warn("Siz bu guruhga a'zo emassiz !!!");
+                return ResponseData.notFoundData("You are not member of this group !!!");
             }
-            log.info("Group uuid, {} bo'yicha ma'lumot olindi", group.getUuid());
-            return ResponseData.success200(mapper.toDto(optional.get()));
         }
-        log.warn("Siz bu guruhga a'zo emassiz !!!");
-        return ResponseData.notFoundData("You are not member of this group !!!");
+        return ResponseData.notFoundData("User role not defined !!!");
     }
 
     @Transactional
@@ -104,7 +118,7 @@ public class GrServImpl implements GrServ {
         Optional<Group> optional = repo.findByUuid(dto.getUuid());
         if (Utils.isEmpty(optional)) {
             log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", dto.getUuid());
-            ResponseData.notFoundData("Group not found !!!");
+            return ResponseData.notFoundData("Group not found !!!");
         }
         Group group = optional.get();
         if (!group.isActive()) {

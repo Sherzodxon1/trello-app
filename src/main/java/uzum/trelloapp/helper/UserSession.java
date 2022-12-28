@@ -13,7 +13,7 @@ public class UserSession {
     public final UserServ serv;
 
     public User getUser() {
-        String phone = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        return serv.findByPhone(phone);
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return serv.findByUsername(username);
     }
 }
