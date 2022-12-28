@@ -345,10 +345,12 @@ public class UserServImpl implements UserServ {
     public User checkUser(UUID uuid) {
         Optional<User> optional = repo.findByUuid(uuid);
         if (optional.isEmpty()) {
+            log.error("User uuid, {} bo'yicha ma'lumot topilmadi", uuid);
             throw new RuntimeException("User not found !!!");
         }
         User user = optional.get();
         if (!user.isActive()) {
+            log.error("User uuid, {} bo'yicha faol emas!", uuid);
             throw new RuntimeException("This user is not active !!!");
         }
         return user;

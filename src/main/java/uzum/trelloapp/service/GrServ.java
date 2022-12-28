@@ -22,5 +22,5 @@ public interface GrServ {
 
     Group checkGroup(UUID uuid);
 
-    boolean isMember(Long groupId, Long userId);
+    boolean isMember(UUID groupUuid, UUID userUuid);
 }

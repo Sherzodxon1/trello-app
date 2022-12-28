@@ -13,6 +13,7 @@ public interface BaseURI {
     String TOKEN = "/token";
     String REFRESH = "/refresh";
     String USER = "/user";
+    String MEMBER = "/member";
     String ROLE = "/role";
     String GROUP = "/group";
     String PROJECT = "/project";
