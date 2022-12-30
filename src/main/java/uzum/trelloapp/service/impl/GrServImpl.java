@@ -42,7 +42,7 @@ public class GrServImpl implements GrServ {
         List<Group> list = repo.findAllByOwnerUuid(session.getUser().getUuid());
         if (Utils.isEmpty(list)) {
             log.warn("Guruhlar ro'yxati topilmadi!");
-            return ResponseData.notFoundData("Group are not found !!!");
+            return ResponseData.notFoundData("Groups are not found !!!");
         }
         List<GrDTO> dtoList = new ArrayList<>();
         list.forEach(group -> dtoList.add(mapper.toDto(group)));
@@ -59,7 +59,7 @@ public class GrServImpl implements GrServ {
                 Optional<Group> optional = repo.findByUuid(group.getUuid());
                 if (Utils.isEmpty(optional)) {
                     log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", group.getUuid());
-                    ResponseData.notFoundData("Group not found !!!");
+                    return ResponseData.notFoundData("Group not found !!!");
                 }
                 log.info("Group uuid, {} bo'yicha ma'lumot olindi", group.getUuid());
                 return ResponseData.success200(mapper.toDto(optional.get()));
@@ -166,14 +166,29 @@ public class GrServImpl implements GrServ {
 
     @Override
     public Group checkGroup(UUID uuid) {
-        Optional<Group> groupOptional = repo.findByUuid(uuid);
-        if (groupOptional.isEmpty()) {
+        Optional<Group> optional = repo.findByUuid(uuid);
+        if (optional.isEmpty()) {
             log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", uuid);
             throw new RuntimeException("Group not found!!!");
         }
-        Group group = groupOptional.get();
+        Group group = optional.get();
         if (!group.isActive()) {
             log.error("Group uuid, {} bo'yicha faol emas!", uuid);
+            throw new RuntimeException("This group is not active!!!");
+        }
+        return group;
+    }
+
+    @Override
+    public Group checkGroup(Long id) {
+        Optional<Group> optional = repo.findById(id);
+        if (optional.isEmpty()) {
+            log.error("Group uuid, {} bo'yicha ma'lumot topilmadi", id);
+            throw new RuntimeException("Group not found!!!");
+        }
+        Group group = optional.get();
+        if (!group.isActive()) {
+            log.error("Group uuid, {} bo'yicha faol emas!", id);
             throw new RuntimeException("This group is not active!!!");
         }
         return group;

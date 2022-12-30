@@ -12,7 +12,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "project")
+@Table(name = "projects")
 public class Project extends BaseEntity {
 
     @Column(name = "name")
@@ -24,17 +24,20 @@ public class Project extends BaseEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "link")
+    private String link;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Group group;
     @Column(name = "group_id")
-    private Integer groupId;
+    private Long groupId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User owner;
     @Column(name = "owner_id")
-    private Integer ownerId;
+    private Long ownerId;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "type")
