@@ -11,7 +11,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "task_check_list")
+@Table(name = "task_check_lists")
 public class TaskCheckList extends BaseEntity {
 
     @Column(name = "name", unique = true, nullable = false)
