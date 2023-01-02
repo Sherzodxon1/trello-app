@@ -17,6 +17,15 @@ public class Task extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private User owner;
+    @Column(name = "owner_id")
+    private Long ownerId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Project project;

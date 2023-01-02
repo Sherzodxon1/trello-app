@@ -20,11 +20,8 @@ public class TaskUpDTO {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("project_id")
-    private PrDTO projectId;
-
-    @JsonProperty("project_column_id")
-    private ProjectColumn projectColumn;
+    @JsonProperty("description")
+    private String description;
 
     @JsonProperty("position")
     private Integer position;
