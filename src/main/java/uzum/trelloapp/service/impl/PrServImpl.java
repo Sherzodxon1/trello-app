@@ -2,6 +2,7 @@ package uzum.trelloapp.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uzum.trelloapp.common.ResponseData;
@@ -146,14 +147,52 @@ public class PrServImpl implements PrServ {
         return ResponseData.success201(mapper.toDto(project));
     }
 
+    @Transactional
     @Override
     public ResponseEntity<ResponseData<PrDTO>> edit(PrUpDTO dto) {
-        return null;
+        Optional<Project> optional = repo.findByUuid(dto.getUuid());
+        if (Utils.isEmpty(optional)) {
+            log.error("Project uuid, {} bo'yicha ma'lumot topilmadi", dto.getUuid());
+            return ResponseData.notFoundData("Project not found !!!");
+        }
+        Project project = optional.get();
+        if (!project.isActive()) {
+            log.error("Project uuid, {} bo'yicha faol emas!", dto.getUuid());
+            return ResponseData.inActive("This project is not active !!!");
+        } else if (!Utils.isOwner(project.getOwnerId(), dto.getOwnerId())) {
+            log.error("Sizda administrator huquqlari yo'q!");
+            return ResponseData.inActive("You do not have admin rights !");
+        }
+        project = mapper.toEntity(project, dto);
+        repo.save(project);
+        log.info("Project {} - ma'lumotlari yangilandi!", project.getUsername());
+        return ResponseData.success202(mapper.toDto(project));
     }
 
+    @Transactional
     @Override
     public ResponseEntity<ResponseData<PrDTO>> delete(PrDelDTO dto) {
-        return null;
+        Optional<Project> optional = repo.findByUuid(dto.getUuid());
+        if (Utils.isEmpty(optional)) {
+            log.error("Project uuid, {} bo'yicha ma'lumot topilmadi", dto.getUuid());
+            ResponseData.notFoundData("Project not found !!!");
+        }
+
+        Project project = optional.get();
+        if (project.isDeleted()) {
+            log.error("Group uuid, {} bo'yicha oldin o'chirilgan", dto.getUuid());
+            return ResponseData.isDeleted("This group was previously disabled !!!");
+        } else if (!project.getUsername().equals(dto.getUsername())) {
+            log.error("Group username, {} bo'yicha username mos emas!", dto.getUsername());
+            return ResponseData.errorStatus("Username is incorrect", HttpStatus.NOT_FOUND);
+        }
+
+        project.setDeleted(true);
+        project.setActive(false);
+        project.setUsername(project.getUsername() + "_isDel");
+        repo.save(project);
+        log.info("Project uuid, {} bo'yicha o'chirildi!", dto.getUuid());
+        return ResponseData.success200(mapper.toDto(project));
     }
 
     @Override
