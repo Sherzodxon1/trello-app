@@ -1,4 +1,4 @@
-package uzum.trelloapp.mapper.qualifier;
+package uzum.trelloapp.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,6 +9,7 @@ import uzum.trelloapp.dto.pr.PrUpDTO;
 import uzum.trelloapp.entity.Project;
 import uzum.trelloapp.mapper.GrMap;
 import uzum.trelloapp.mapper.UserMap;
+import uzum.trelloapp.mapper.qualifier.PTypeQualifier;
 
 @Mapper(componentModel = "spring",
         uses = {

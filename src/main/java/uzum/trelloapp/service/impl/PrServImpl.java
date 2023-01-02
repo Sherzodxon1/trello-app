@@ -12,7 +12,7 @@ import uzum.trelloapp.enums.PrColType;
 import uzum.trelloapp.exception.UserNotFoundException;
 import uzum.trelloapp.helper.UserSession;
 import uzum.trelloapp.helper.Utils;
-import uzum.trelloapp.mapper.qualifier.PrMap;
+import uzum.trelloapp.mapper.PrMap;
 import uzum.trelloapp.repo.PrColRepo;
 import uzum.trelloapp.repo.PrMemberRepo;
 import uzum.trelloapp.repo.PrRepo;
