@@ -17,6 +17,7 @@ public interface BaseURI {
     String ROLE = "/role";
     String GROUP = "/group";
     String PROJECT = "/project";
+    String TASK = "/task";
 
     String GET = "/get";
     String ALL = "/all";
@@ -27,4 +28,6 @@ public interface BaseURI {
     String CHANGE_PASSWORD = "/changepassword";
     String ATTACH = "/attach";
     String TO = "/to";
+    String INSERT = "/insert";
+    String POSITION = "/position";
 }
