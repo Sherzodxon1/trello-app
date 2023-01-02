@@ -16,11 +16,14 @@ public class TaskCrDTO {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("project_id")
-    private PrDTO projectId;
+    @JsonProperty("description")
+    private String description;
 
-    @JsonProperty("project_column_id")
-    private ProjectColumn projectColumn;
+    @JsonProperty("project")
+    private PrDTO project;
+
+    @JsonProperty("column_id")
+    private ProjectColumn columnId;
 
     @JsonProperty("position")
     private Integer position;

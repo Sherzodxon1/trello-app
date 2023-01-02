@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uzum.trelloapp.dto.pr.PrDTO;
+import uzum.trelloapp.dto.user.UserDTO;
 import uzum.trelloapp.entity.ProjectColumn;
 
 import java.time.LocalDateTime;
@@ -25,11 +26,17 @@ public class TaskDTO {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("project_id")
-    private PrDTO projectId;
+    @JsonProperty("description")
+    private String description;
 
-    @JsonProperty("project_column_id")
-    private ProjectColumn projectColumn;
+    @JsonProperty("owner")
+    private UserDTO owner;
+
+    @JsonProperty("project")
+    private PrDTO project;
+
+    @JsonProperty("column")
+    private ProjectColumn column;
 
     @JsonProperty("position")
     private Integer position;
