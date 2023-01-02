@@ -54,6 +54,7 @@ public class GrContr {
         return serv.delete(dto);
     }
 
+    @ApiOperation("Add Member to GROUP")
     @PostMapping(BaseURI.ADD + BaseURI.MEMBER)
     public ResponseEntity<ResponseData<GrMemberDTO>> addMember(@Valid @RequestBody GrMemberAddDTO dto) {
         return grMemberServ.addMember(dto);

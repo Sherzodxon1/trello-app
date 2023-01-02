@@ -54,6 +54,7 @@ public class PrContr {
         return serv.delete(dto);
     }
 
+    @ApiOperation("Add Member to PROJECT")
     @PostMapping(BaseURI.ADD + BaseURI.MEMBER)
     public ResponseEntity<ResponseData<PrMemberDTO>> addMember(@Valid @RequestBody PrMemberAddDTO dto) {
         return prMemberServ.addMember(dto);
