@@ -14,6 +14,7 @@ import uzum.trelloapp.exception.UserNotFoundException;
 import uzum.trelloapp.helper.UserSession;
 import uzum.trelloapp.helper.Utils;
 import uzum.trelloapp.repo.TaskRepo;
+import uzum.trelloapp.service.TaskServ;
 import uzum.trelloapp.service.UserServ;
 
 import java.util.Optional;

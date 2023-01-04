@@ -9,8 +9,8 @@ import uzum.trelloapp.base.BaseURI;
 import uzum.trelloapp.common.ResponseData;
 import uzum.trelloapp.dto.pr.*;
 import uzum.trelloapp.exception.UserNotFoundException;
+import uzum.trelloapp.service.PrMemberServ;
 import uzum.trelloapp.service.PrServ;
-import uzum.trelloapp.service.impl.PrMemberServ;
 
 import javax.validation.Valid;
 import java.util.List;

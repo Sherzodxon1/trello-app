@@ -1,4 +1,4 @@
-package uzum.trelloapp.service.impl;
+package uzum.trelloapp.service;
 
 import org.springframework.http.ResponseEntity;
 import uzum.trelloapp.common.ResponseData;

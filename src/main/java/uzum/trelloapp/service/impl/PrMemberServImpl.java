@@ -14,6 +14,7 @@ import uzum.trelloapp.entity.User;
 import uzum.trelloapp.helper.Utils;
 import uzum.trelloapp.mapper.PrMemberMap;
 import uzum.trelloapp.repo.PrMemberRepo;
+import uzum.trelloapp.service.PrMemberServ;
 import uzum.trelloapp.service.PrServ;
 import uzum.trelloapp.service.UserServ;
 
