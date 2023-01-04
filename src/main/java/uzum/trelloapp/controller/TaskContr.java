@@ -13,7 +13,7 @@ import uzum.trelloapp.common.ResponseData;
 import uzum.trelloapp.dto.task.TaskDTO;
 import uzum.trelloapp.dto.task.TaskPositionDTO;
 import uzum.trelloapp.exception.UserNotFoundException;
-import uzum.trelloapp.service.impl.TaskServ;
+import uzum.trelloapp.service.TaskServ;
 
 import javax.validation.Valid;
 
