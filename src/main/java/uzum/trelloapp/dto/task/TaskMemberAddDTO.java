@@ -7,15 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskGetDTO {
+public class TaskMemberAddDTO {
 
-    @JsonProperty("user")
-    private UUID user;
+    @JsonProperty("host")
+    private UUID host; // taklif qilayotgan user
+
+    @JsonProperty("guest")
+    private UUID guest; // taklif qilinayotgan user
 
     @JsonProperty("task")
     private UUID task;
+
 }

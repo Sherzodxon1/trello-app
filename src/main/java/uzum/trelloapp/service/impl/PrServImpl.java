@@ -180,10 +180,10 @@ public class PrServImpl implements PrServ {
 
         Project project = optional.get();
         if (project.isDeleted()) {
-            log.error("Group uuid, {} bo'yicha oldin o'chirilgan", dto.getUuid());
+            log.error("Project uuid, {} bo'yicha oldin o'chirilgan", dto.getUuid());
             return ResponseData.isDeleted("This group was previously disabled !!!");
         } else if (!project.getUsername().equals(dto.getUsername())) {
-            log.error("Group username, {} bo'yicha username mos emas!", dto.getUsername());
+            log.error("Project username, {} bo'yicha username mos emas!", dto.getUsername());
             return ResponseData.errorStatus("Username is incorrect", HttpStatus.NOT_FOUND);
         }
 
@@ -205,6 +205,21 @@ public class PrServImpl implements PrServ {
         Project project = optional.get();
         if (!project.isActive()) {
             log.error("Project uuid, {} bo'yicha faol emas!", uuid);
+            throw new RuntimeException("This project is not active!!!");
+        }
+        return project;
+    }
+
+    @Override
+    public Project checkProject(Long id) {
+        Optional<Project> optional = repo.findById(id);
+        if (optional.isEmpty()) {
+            log.error("Project uuid, {} bo'yicha ma'lumot topilmadi", id);
+            throw new RuntimeException("Project not found!!!");
+        }
+        Project project = optional.get();
+        if (!project.isActive()) {
+            log.error("Project uuid, {} bo'yicha faol emas!", id);
             throw new RuntimeException("This project is not active!!!");
         }
         return project;

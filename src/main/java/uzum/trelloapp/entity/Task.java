@@ -17,8 +17,14 @@ public class Task extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "description")
     private String description;
+
+    @Column(name = "link")
+    private String link;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -33,10 +39,10 @@ public class Task extends BaseEntity {
     private Long projectId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_column_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private ProjectColumn projectColumn;
-    @Column(name = "project_column_id")
-    private Long projectColumnId;
+    @JoinColumn(name = "column_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private ProjectColumn column;
+    @Column(name = "column_id")
+    private Long columnId;
 
     @Column(name = "position")
     private Integer position;
