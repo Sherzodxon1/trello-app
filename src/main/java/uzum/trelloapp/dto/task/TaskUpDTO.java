@@ -17,12 +17,12 @@ public class TaskUpDTO {
     @JsonProperty("uuid")
     private UUID uuid;
 
+    @JsonProperty("ownerId")
+    private Long ownerId;
+
     @JsonProperty("name")
     private String name;
 
     @JsonProperty("description")
     private String description;
-
-    @JsonProperty("position")
-    private Integer position;
 }

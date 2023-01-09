@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uzum.trelloapp.dto.pr.PrDTO;
-import uzum.trelloapp.entity.ProjectColumn;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,11 +18,14 @@ public class TaskCrDTO {
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("project")
-    private PrDTO project;
+    @JsonProperty("ownerId")
+    private Long ownerId;
 
-    @JsonProperty("column_id")
-    private ProjectColumn columnId;
+    @JsonProperty("projectId")
+    private Long projectId;
+
+    @JsonProperty("columnId")
+    private Long columnId;
 
     @JsonProperty("position")
     private Integer position;
